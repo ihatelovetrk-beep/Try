@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--neon-red:#ff003c;
+--neon-gold:#FFD700;
+--dark-bg:#1a0005;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+user-select:none;
+}
+
+body{
+background:transparent;
+overflow:hidden;
+width:100vw;
+height:100vh;
+font-family:'Orbitron',sans-serif;
+}
+
+/* BACKGROUND GAME */
+
+.bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+border:none;
+z-index:1;
+}
+
+/* PANEL */
+
+#main{
+position:absolute;
+top:80px;
+left:20px;
+width:220px;
+background:linear-gradient(135deg,#33000b,#0a0002);
+border-radius:20px;
+padding:12px;
+border:1.5px solid var(--neon-red);
+box-shadow:0 0 20px rgba(255,0,60,0.5);
+display:flex;
+flex-direction:column;
+z-index:9999;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding-bottom:8px;
+border-bottom:1px solid rgba(255,0,60,0.4);
+cursor:grab;
+}
+
+.brand-title{
+font-weight:900;
+font-size:11px;
+color:var(--neon-gold);
+text-shadow:0 0 8px var(--neon-gold);
+}
+
+#cls-btn{
+color:var(--neon-red);
+font-weight:bold;
+cursor:pointer;
+}
+
+/* SCREEN */
+
+.display-bezel{
+width:100%;
+height:105px;
+background:#0a0002;
+border-radius:12px;
+padding:4px;
+border:1.5px solid var(--neon-red);
+}
+
+.screen{
+width:100%;
+height:100%;
+background:radial-gradient(circle,#220005,#1a0005);
+border-radius:8px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+padding:6px 8px;
+}
+
+/* TOP */
+
+.screen-top{
+display:flex;
+justify-content:space-between;
+font-size:9px;
+}
+
+.status-led{
+color:var(--neon-red);
+font-weight:700;
+}
+
+.period-badge{
+font-family:'Space Mono',monospace;
+font-size:8px;
+color:white;
+}
+
+/* RESULT */
+
+.res-big{
+font-weight:900;
+font-size:24px;
+color:var(--neon-gold);
+text-shadow:0 0 15px var(--neon-gold);
+text-align:center;
+}
+
+/* TERMINAL */
+
+.terminal-text{
+font-family:'Space Mono',monospace;
+font-size:8px;
+color:var(--neon-gold);
+text-align:center;
+}
+
+/* BUTTON */
+
+.btn-wrap{
+margin-top:10px;
+}
+
+.watch-btn{
+width:100%;
+padding:10px;
+background:black;
+border:1px solid var(--neon-red);
+border-radius:8px;
+color:var(--neon-gold);
+font-family:'Orbitron';
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- GAME BACKGROUND -->
+
+<iframe class="bg"
+src="https://15yaarwin.com/#/register?invitationCode=13152222643">
+</iframe>
+
+
+<!-- PANEL -->
+
+<div id="main">
+
+<div class="header" id="dragHeader">
+
+<span class="brand-title" contenteditable="true">VIP NUMBER PANAL</span>
+
+<div id="cls-btn" onclick="main.style.display='none'">✕</div>
+
+</div>
+
+<div class="display-bezel">
+
+<div class="screen">
+
+<div class="screen-top">
+
+<div class="status-led" contenteditable="true">
+STATUS
+</div>
+
+<div class="period-badge" contenteditable="true">
+PRD 00000
+</div>
+
+</div>
+
+<div class="res-big" contenteditable="true">
+BIG
+</div>
+
+<div class="terminal-text" contenteditable="true">
+CONFIDENCE 98.9%
+</div>
+
+</div>
+</div>
+
+<div class="btn-wrap">
+<button class="watch-btn">SCAN</button>
+</div>
+
+</div>
+
+
+<script>
+
+/* DRAG PANEL */
+
+const panel=document.getElementById("main");
+const drag=document.getElementById("dragHeader");
+
+let startX=0,startY=0,offsetX=0,offsetY=0,isDown=false;
+
+function startDrag(x,y){
+isDown=true;
+startX=x;
+startY=y;
+offsetX=panel.offsetLeft;
+offsetY=panel.offsetTop;
+}
+
+function moveDrag(x,y){
+if(!isDown) return;
+panel.style.left=(offsetX+(x-startX))+"px";
+panel.style.top=(offsetY+(y-startY))+"px";
+}
+
+function endDrag(){
+isDown=false;
+}
+
+drag.addEventListener("mousedown",e=>startDrag(e.clientX,e.clientY));
+document.addEventListener("mousemove",e=>moveDrag(e.clientX,e.clientY));
+document.addEventListener("mouseup",endDrag);
+
+drag.addEventListener("touchstart",e=>startDrag(e.touches[0].clientX,e.touches[0].clientY));
+document.addEventListener("touchmove",e=>moveDrag(e.touches[0].clientX,e.touches[0].clientY));
+document.addEventListener("touchend",endDrag);
+
+</script>
+
+</body>
